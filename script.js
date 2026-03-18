@@ -6,6 +6,7 @@ function formatUrl(text) {
     return `https://api.nexray.web.id/maker/bratanime?text=${encoded}`;
 }
 
+// Fungsi updateUrlDisplay tetap ada tapi tidak digunakan (karena URL display disembunyikan)
 function updateUrlDisplay() {
     const inputText = document.getElementById('textInput').value;
     const urlDisplay = document.getElementById('urlDisplay');
@@ -13,7 +14,7 @@ function updateUrlDisplay() {
 }
 
 document.getElementById('textInput').addEventListener('input', updateUrlDisplay);
-updateUrlDisplay();
+updateUrlDisplay(); // Tetap dijalankan meski elemennya hidden
 
 async function generateImage() {
     const inputText = document.getElementById('textInput').value;
@@ -40,18 +41,16 @@ async function generateImage() {
     downloadBtn.disabled = true;
     openBtn.disabled = true;
 
-    statusEl.innerHTML = `⏳ Mengakses API: <code>${apiUrl}</code> ...`;
+    statusEl.innerHTML = `⏳ Mengakses API...`;
 
     try {
         const response = await fetch(apiUrl);
         
         if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+            throw new Error(`HTTP Error: ${response.status}`);
         }
 
-        const contentType = response.headers.get('content-type');
-        statusEl.innerHTML = `📡 Status: <strong>${response.status} OK</strong><br>`;
-        statusEl.innerHTML += `📦 Tipe: ${contentType || 'tidak diketahui'}`;
+        statusEl.innerHTML = `📡 Status: <strong>${response.status} OK</strong>`;
 
         const imageBlob = await response.blob();
         
@@ -67,7 +66,7 @@ async function generateImage() {
         img.onload = () => {
             imageContainer.innerHTML = '';
             imageContainer.appendChild(img);
-            statusEl.innerHTML += `<br>✅✅ Gambar berhasil dimuat!`;
+            statusEl.innerHTML = `✅ Gambar berhasil dibuat!`;
             
             actionButtons.style.display = 'flex';
             downloadBtn.disabled = false;
@@ -80,7 +79,7 @@ async function generateImage() {
 
     } catch (error) {
         console.error('Error:', error);
-        statusEl.innerHTML += `<br>❌❌ Gagal: ${error.message}`;
+        statusEl.innerHTML = `❌ Gagal: ${error.message}`;
         imageContainer.innerHTML = `
             <div class="error-message">
                 ❌ Gagal memuat gambar<br>
