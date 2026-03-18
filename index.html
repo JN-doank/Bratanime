@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brat Anime Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>Brat Anime Generator</h1>
+                <p>Ubah teks biasa menjadi gambar bergaya Brat Anime</p>
+            </div>
+
+            <div class="input-group">
+                <label for="textInput">Masukkan teks</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="textInput" 
+                        placeholder="Contoh: Halo Dunia" 
+                        value="Halo Dunia"
+                        autocomplete="off"
+                    />
+                    <button class="generate-btn" onclick="generateImage()" id="generateBtn">
+                        <span>✨</span> Generate
+                    </button>
+                </div>
+            </div>
+
+            <div class="status-area" id="status">
+                <span class="status-dot"></span>
+                <span class="status-text">Siap menghasilkan gambar</span>
+            </div>
+
+            <div class="image-container" id="imageContainer">
+                <div class="loading-spinner"></div>
+            </div>
+
+            <div class="action-buttons" id="actionButtons">
+                <button class="action-btn download-btn" onclick="downloadImage()" id="downloadBtn" disabled>
+                    <span>💾</span> Download
+                </button>
+                <button class="action-btn open-btn" onclick="openInNewTab()" id="openBtn" disabled>
+                    <span>🔗</span> Buka Gambar
+                </button>
+            </div>
+
+            <div class="footer">
+                <p>Powered by MweheheXcode • Klik Generate untuk membuat gambar</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
